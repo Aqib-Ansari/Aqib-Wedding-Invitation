@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wedding Invitation: Aqib and Fiza</title>
+<meta name="description" content="You are warmly invited to the wedding of Mohammad Aqib Ansari and Fiza Ansari, 28 November 2026.">
+<meta property="og:title" content="Wedding Invitation: Aqib and Fiza">
+<meta property="og:description" content="28 and 29 November 2026, Usrauli, Shahganj, Jaunpur">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Nastaliq+Urdu:wght@400;500&family=Amiri:ital,wght@0,400;0,700;1,400&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #031c18;
+    --deep: #05302a;
+    --gold: #d9b45f;
+    --gold-hi: #f0d58a;
+    --gold-lo: #b8934a;
+    --ivory: #f1e8cf;
+    --mist: #a9c2b8;
+    --turn: 1.15s;
+    --serif: "Amiri", "Times New Roman", serif;
+    --sans: "Jost", system-ui, sans-serif;
+    --tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23d9b45f' stroke-opacity='.12' stroke-width='1'%3E%3Crect x='16' y='16' width='32' height='32'/%3E%3Crect x='16' y='16' width='32' height='32' transform='rotate(45 32 32)'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3C/g%3E%3C/svg%3E");
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--sans);
+    color: var(--ivory);
+    line-height: 1.5;
+    display: grid;
+    place-items: center;
+    background: var(--tile), radial-gradient(ellipse 80% 60% at 50% 0%, #0a3d35, transparent 70%), var(--night);
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+  /* ---------- Book shell ---------- */
+  .card {
+    position: relative;
+    width: min(100%, 27rem);
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    overflow: hidden;
+  }
+  @media (min-width: 30rem) and (min-height: 44rem) {
+    .card {
+      height: min(100dvh - 2.5rem, 50rem);
+      border-radius: 10px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.6);
+      background: var(--night);
+    }
+  }
+
+  .dust { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .dust i {
+    position: absolute; bottom: -12px; left: var(--x);
+    width: var(--s); height: var(--s); border-radius: 50%;
+    background: radial-gradient(circle, #fbe7a6 0%, #d9b45f 55%, transparent 72%);
+    opacity: 0;
+    animation: dust var(--t) linear var(--dl) infinite;
+  }
+  @keyframes dust {
+    0%   { transform: translate(0,0); opacity: 0; }
+    12%  { opacity: .8; }
+    88%  { opacity: .45; }
+    100% { transform: translate(var(--dx), -105dvh); opacity: 0; }
+  }
+
+  /* ---------- The book: a stack of thick pages ---------- */
+  .book {
+    position: relative; z-index: 1;
+    margin: .8rem .9rem .4rem;
+    min-height: 0;
+    perspective: 2600px;
+    touch-action: pan-y;
+    user-select: none; -webkit-user-select: none;
+  }
+  /* Page block: the cut edges of the stacked leaves, gilt-tinted */
+  .block {
+    position: absolute; inset: 0; z-index: 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #0c3a32, #082b25);
+    box-shadow:
+      1px 1px 0 #efe2b8, 2px 2px 0 #cdb679, 3px 3px 0 #eadba6,
+      4px 4px 0 #b99f5f, 5px 5px 0 #e6d293, 6px 6px 0 #a88a4d,
+      7px 7px 0 #d9c17f, 8px 8px 0 #8f7340;
+  }
+
+  .sheet {
+    position: absolute; inset: 0;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transition: transform var(--turn) cubic-bezier(.45,.05,.2,1);
+  }
+  .sheet.flipped { transform: rotateY(-180deg); }
+
+  .face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border-radius: 3px 7px 7px 3px;
+    overflow: hidden;
+  }
+  .face.front {
+    background:
+      var(--grain), var(--tile),
+      radial-gradient(ellipse 90% 55% at 60% 0%, #0b4a40, transparent 70%),
+      linear-gradient(180deg, var(--deep) 0%, #04251f 75%);
+    box-shadow: inset 16px 0 22px -16px rgba(0,0,0,.85);
+  }
+  .face.back {
+    transform: rotateY(180deg);
+    background:
+      var(--grain), var(--tile),
+      linear-gradient(180deg, #04251f, #031c18);
+    box-shadow: inset -16px 0 22px -16px rgba(0,0,0,.85);
+  }
+  .frame {
+    position: absolute; inset: .5rem; z-index: 3; pointer-events: none;
+    border: 1px solid rgba(217,180,95,.5);
+    outline: 1px solid rgba(217,180,95,.18); outline-offset: 4px;
+  }
+  .back .frame { display: none; }
+  .shade {
+    position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,.6), rgba(0,0,0,.05) 45%, transparent);
+  }
+  .sheet.turning .shade { animation: shade var(--turn) ease; }
+  @keyframes shade { 0%, 100% { opacity: 0; } 45% { opacity: 1; } }
+
+  /* Scrollable page content */
+  .scroll {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+    touch-action: pan-y;
+    padding: 1.4rem 1.7rem 1.2rem;
+    text-align: center;
+    scrollbar-width: none;
+  }
+  .scroll::-webkit-scrollbar { display: none; }
+  .inner { margin: auto 0; width: 100%; }
+
+  .ar { font-family: var(--serif); direction: rtl; line-height: 1.9; }
+  .star { width: 1.05rem; height: 1.05rem; color: var(--gold); flex: none; }
+  .divider { display: flex; align-items: center; gap: .8rem; max-width: 11rem; margin: .9rem auto; }
+  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-lo)); }
+  .divider::after { transform: scaleX(-1); }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 1.55rem; color: var(--gold); margin-bottom: .6rem; line-height: 1.2; }
+
+  /* ---------- Cover ---------- */
+  .arch {
+    position: relative;
+    width: min(100%, 21rem, calc((100dvh - 9rem) * .714));
+    aspect-ratio: 300 / 420;
+    margin: 0 auto;
+    container-type: inline-size;
+  }
+  .arch > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .arch-content {
+    position: absolute; inset: 0;
+    padding-top: 23%;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .crescent { width: 8cqw; height: 8cqw; color: var(--gold); margin-bottom: 2cqw; }
+  .bismillah { font-size: 7cqw; line-height: 1.75; color: var(--gold-hi); }
+  .bismillah span { display: block; }
+  .bismillah-en { font-size: 3.3cqw; line-height: 1.5; color: var(--mist); max-width: 60cqw; margin-top: 1cqw; }
+  .names { margin-top: 7cqw; font-family: var(--serif); line-height: 1; }
+  .names b {
+    display: block;
+    font-family: "Great Vibes", "Amiri", cursive;
+    font-weight: 400;
+    font-size: 16.5cqw;
+    line-height: 1.02;
+    padding: .2em .14em .02em;
+    color: var(--gold-hi);
+    background: linear-gradient(100deg, #b8934a 0%, #d9b45f 30%, #fff1c2 50%, #d9b45f 70%, #b8934a 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .names i { display: block; font-family: var(--serif); font-size: 6.5cqw; line-height: 1; color: var(--gold); font-style: italic; }
+  .arch-title { font-size: 6cqw; line-height: 1.6; color: var(--gold); margin-top: 3cqw; }
+  .arch-sub { font-size: 3.4cqw; color: var(--ivory); margin-top: -.5cqw; }
+  .hint { margin-top: .7rem; font-size: .88rem; color: var(--mist); display: inline-flex; align-items: center; gap: .35rem; }
+  .hint svg { width: 1rem; height: 1rem; color: var(--gold); }
+
+  /* ---------- Couple ---------- */
+  .salaam { font-size: 1.5rem; color: var(--gold-hi); }
+  .invite { color: var(--mist); font-size: .98rem; max-width: 19rem; margin: .1rem auto 1.1rem; }
+  .person { font-family: var(--serif); font-size: clamp(1.9rem, 8.4vw, 2.4rem); line-height: 1.15; }
+  .of { color: var(--mist); font-size: .95rem; margin-top: .15rem; }
+  .verse { margin-top: 1.3rem; padding-top: 1.1rem; border-top: 1px solid rgba(217,180,95,.3); }
+  .verse .ar { font-size: 1.15rem; color: var(--gold-hi); line-height: 2; }
+  .verse .ur { font-family: "Noto Nastaliq Urdu", "Amiri", serif; direction: rtl; font-size: .95rem; line-height: 2.2; color: var(--ivory); margin-top: .2rem; }
+  .verse small { display: block; font-family: "Noto Nastaliq Urdu", "Amiri", serif; direction: rtl; font-size: .8rem; line-height: 2; color: var(--mist); }
+
+  /* ---------- Events and venue ---------- */
+  .ev {
+    display: grid; grid-template-columns: 5rem 1fr; align-items: center; gap: .9rem;
+    text-align: left;
+    border: 1px solid rgba(217,180,95,.55);
+    outline: 1px solid rgba(217,180,95,.22); outline-offset: -6px;
+    background: rgba(217,180,95,.06);
+    padding: .9rem 1.1rem;
+    margin-top: .65rem;
+  }
+  .ev-date { text-align: center; border-right: 1px solid rgba(217,180,95,.35); padding-right: .8rem; }
+  .ev-date b { display: block; font-family: var(--serif); font-weight: 400; font-size: 3rem; line-height: 1; color: var(--gold-hi); }
+  .ev-date span { font-size: .8rem; color: var(--mist); }
+  .ev h3 { font-family: var(--serif); font-weight: 400; font-size: 1.35rem; line-height: 1.3; }
+  .ev h3 .ar { color: var(--gold); font-size: 1.3rem; margin-left: .45rem; display: inline-block; }
+  .ev p { font-size: .92rem; color: var(--mist); line-height: 1.4; }
+  .ev p strong { color: var(--ivory); font-weight: 500; }
+  .venue { margin-top: 1.2rem; }
+  .venue .addr { font-family: var(--serif); font-size: 1.25rem; line-height: 1.35; }
+  .venue .addr small { display: block; font-family: var(--sans); font-size: .92rem; color: var(--mist); }
+  .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem; margin-top: .9rem; }
+  .btn {
+    font: 500 .92rem var(--sans); text-decoration: none; cursor: pointer;
+    color: var(--gold-hi); background: transparent;
+    border: 1px solid var(--gold-lo); border-radius: 999px;
+    padding: .55rem 1.1rem;
+    transition: background .2s, transform .2s, box-shadow .2s;
+  }
+  .btn:hover { background: rgba(217,180,95,.15); transform: translateY(-1px); }
+  .btn.primary { background: var(--gold); color: #231a05; border-color: var(--gold); font-weight: 600; }
+  .btn.primary:hover { background: var(--gold-hi); box-shadow: 0 6px 18px rgba(217,180,95,.3); }
+  .btn:focus-visible, .nav button:focus-visible { outline: 3px solid var(--ivory); outline-offset: 3px; }
+
+  /* ---------- From (sender's address) ---------- */
+  .venue .mob { margin-top: .5rem; font-size: .95rem; color: var(--mist); }
+  .venue .mob a { color: var(--gold-hi); text-decoration: none; border-bottom: 1px solid rgba(217,180,95,.4); }
+  .venue .addr small + small { margin-top: .1rem; }
+
+  /* ---------- Compliments, dua, countdown ---------- */
+  .list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: .1rem 1rem; max-width: 20rem; margin: 0 auto; font-family: var(--serif); font-size: .85rem; white-space: nowrap; }
+  .dua { margin-top: 1.1rem; }
+  .dua .ar { font-size: 1.2rem; color: var(--gold-hi); line-height: 2; }
+  .dua p.en { font-family: var(--serif); font-style: italic; font-size: .98rem; line-height: 1.4; max-width: 20rem; margin: 0 auto; }
+  .closing { font-family: var(--serif); font-size: 1.3rem; margin-top: .8rem; line-height: 1.3; }
+  .closing small { display: block; font-family: var(--sans); font-size: .85rem; color: var(--mist); }
+  .timer-wrap { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid rgba(217,180,95,.3); }
+  .timer-title { font-size: .85rem; color: var(--mist); margin-bottom: .5rem; }
+  .timer { display: flex; justify-content: center; gap: .45rem; }
+  .cell { min-width: 3.5rem; padding: .4rem .25rem .3rem; border: 1px solid rgba(217,180,95,.5); background: rgba(217,180,95,.06); overflow: hidden; }
+  .cell b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.45rem; line-height: 1.1; color: var(--gold-hi); font-variant-numeric: tabular-nums; }
+  .cell span { display: block; font-size: .72rem; color: var(--mist); }
+  .arrived { font-family: var(--serif); font-size: 1.35rem; color: var(--gold-hi); }
+
+  /* ---------- Navigation ---------- */
+  .nav {
+    position: relative; z-index: 5;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .55rem 1.3rem calc(.9rem + env(safe-area-inset-bottom));
+  }
+  .nav button.arrow {
+    width: 2.5rem; height: 2.5rem; border-radius: 50%;
+    border: 1px solid rgba(217,180,95,.65); background: transparent; color: var(--gold-hi);
+    display: grid; place-items: center; cursor: pointer;
+    transition: opacity .2s, background .2s;
+  }
+  .nav button.arrow:hover:not(:disabled) { background: rgba(217,180,95,.15); }
+  .nav button.arrow:disabled { opacity: .25; cursor: default; }
+  .nav svg { width: 1.1rem; height: 1.1rem; }
+  .dots { display: flex; gap: .5rem; align-items: center; }
+  .dots button { width: .6rem; height: .6rem; border-radius: 999px; border: 1px solid var(--gold); background: transparent; cursor: pointer; padding: 0; transition: width .4s ease, background .3s; }
+  .dots button[aria-current="true"] { width: 1.5rem; background: var(--gold); }
+
+  @media (max-height: 640px) { .scroll { padding-top: .8rem; } }
+
+  /* ---------- Motion ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    /* Cover: the arch draws itself, then the lettering fades in */
+    .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.4s ease-out .2s forwards; }
+    .arch-content { opacity: 0; animation: fade 1.4s ease .9s forwards; }
+    .hint { opacity: 0; animation: fade 1s ease 2.3s forwards; }
+    .hint svg { animation: nudge 1.6s ease-in-out 3s infinite; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes fade { to { opacity: 1; } }
+    @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+
+    .names b { animation: shimmer 6s ease-in-out 2.5s infinite; }
+    @keyframes shimmer { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+
+    .crescent { animation: glow 4s ease-in-out infinite; }
+    @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 0 rgba(240,213,138,0)); } 50% { filter: drop-shadow(0 0 6px rgba(240,213,138,.75)); } }
+
+    .bgstar svg { animation: spin 140s linear infinite; }
+
+    /* Other pages: content rises in when the page is turned to */
+    .rise {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .8s ease, transform .9s cubic-bezier(.2,.7,.2,1);
+      transition-delay: var(--d, 0s);
+    }
+    .scroll.in .rise { opacity: 1; transform: none; }
+
+    .cell b.pop { animation: pop .4s ease; }
+    @keyframes pop { 0% { transform: translateY(-4px); opacity: .35; } 100% { transform: none; opacity: 1; } }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sheet { transition: none; }
+    .dust { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0d58a"/>
+      <stop offset="1" stop-color="#b8934a"/>
+    </linearGradient>
+    <symbol id="star" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.4">
+        <rect x="5.5" y="5.5" width="13" height="13"/>
+        <rect x="5.5" y="5.5" width="13" height="13" transform="rotate(45 12 12)"/>
+      </g>
+      <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="card" id="card">
+  <div class="dust" id="dust" aria-hidden="true"></div>
+
+  <div class="book" id="book" aria-label="Invitation. Swipe, or use the arrow keys, to turn the page.">
+    <div class="block" aria-hidden="true"></div>
+
+    <!-- Page 1: cover -->
+    <section class="sheet" data-page="0" aria-label="Cover">
+      <div class="face front">
+        <div class="frame"></div>
+        <div class="shade"></div>
+        <div class="scroll in">
+          <div class="inner">
+            <div class="arch">
+              <svg viewBox="0 0 300 420" fill="none" aria-hidden="true">
+                <path d="M8 420 V196 C8 120 120 84 150 8 C180 84 292 120 292 196 V420 Z" fill="rgba(217,180,95,.06)"/>
+                <path class="draw" pathLength="1" d="M8 420 V196 C8 120 120 84 150 8 C180 84 292 120 292 196 V420" stroke="url(#gold)" stroke-width="2.2"/>
+                <path class="draw" pathLength="1" d="M20 420 V198 C20 130 124 96 150 28 C176 96 280 130 280 198 V420" stroke="url(#gold)" stroke-width="1" opacity=".7"/>
+              </svg>
+              <div class="arch-content">
+                <svg class="crescent" viewBox="0 0 24 24" aria-hidden="true">
+                  <mask id="cut"><rect width="24" height="24" fill="#fff"/><circle cx="15.6" cy="10" r="7.6" fill="#000"/></mask>
+                  <circle cx="11.5" cy="12.5" r="9" fill="currentColor" mask="url(#cut)"/>
+                  <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/>
+                </svg>
+                <p class="ar bismillah" lang="ar" dir="rtl"><span>بِسْمِ اللَّهِ</span><span>الرَّحْمَٰنِ الرَّحِيمِ</span></p>
+                <p class="bismillah-en">In the name of Allah, the Most Gracious, the Most Merciful</p>
+                <h1 class="names"><b>Aqib</b><i>&amp;</i><b>Fiza</b></h1>
+                <p class="ar arch-title" lang="ar" dir="rtl">دعوة زفاف</p>
+                <p class="arch-sub">Wedding Invitation</p>
+              </div>
+            </div>
+            <p class="hint">Turn the page
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="face back"></div>
+    </section>
+
+    <!-- Page 2: the couple -->
+    <section class="sheet" data-page="1" aria-label="The couple">
+      <div class="face front">
+        <div class="frame"></div>
+        <div class="shade"></div>
+        <div class="scroll">
+          <div class="inner">
+            <p class="ar salaam rise" style="--d:.05s" lang="ar" dir="rtl">السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ</p>
+            <p class="invite rise" style="--d:.15s">With the grace of Allah, we joyfully invite you to the wedding of</p>
+            <p class="person rise" style="--d:.3s">Mohammad Aqib Ansari</p>
+            <p class="of rise" style="--d:.38s">son of Nisar Ahmed Afzal Ahmed</p>
+            <div class="divider rise" style="--d:.5s"><svg class="star"><use href="#star"/></svg></div>
+            <p class="person rise" style="--d:.6s">Fiza Ansari</p>
+            <p class="of rise" style="--d:.68s">daughter of Late Mehboob Ansari</p>
+            <div class="verse rise" style="--d:.85s">
+              <p class="ar" lang="ar" dir="rtl">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+              <p class="ur" lang="ur" dir="rtl">اور اس کی نشانیوں میں سے ہے کہ اس نے تمہارے لیے تمہاری ہی جنس سے جوڑے بنائے تاکہ تم ان سے سکون پاؤ، اور اس نے تمہارے درمیان محبت اور رحمت رکھ دی۔</p>
+              <small lang="ur" dir="rtl">سورۃ الروم، آیت ۲۱</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="face back"></div>
+    </section>
+
+    <!-- Page 3: events and venue -->
+    <section class="sheet" data-page="2" aria-label="Events and venue">
+      <div class="face front">
+        <div class="frame"></div>
+        <div class="shade"></div>
+        <div class="scroll">
+          <div class="inner">
+            <h2 class="rise" style="--d:.05s">Join us</h2>
+            <article class="ev rise" style="--d:.2s">
+              <div class="ev-date"><b>28</b><span>Nov 2026</span></div>
+              <div>
+                <h3>Nikah <span class="ar" lang="ar" dir="rtl">نِكَاح</span></h3>
+                <p><strong>Saturday, 2:00 PM</strong><br>After Zuhr prayer, <span id="masjid">in the Masjid</span></p>
+              </div>
+            </article>
+            <article class="ev rise" style="--d:.35s">
+              <div class="ev-date"><b>29</b><span>Nov 2026</span></div>
+              <div>
+                <h3>Walima <span class="ar" lang="ar" dir="rtl">وَلِيمَة</span></h3>
+                <p><strong>Sunday, 11:00 AM</strong><br>At the same venue</p>
+              </div>
+            </article>
+            <div class="venue rise" style="--d:.55s">
+              <h2>Venue</h2>
+              <p class="addr">Mr. &amp; Mrs. Nisar Ahmad<small>S/o. Late Mohd. Afzaal Ansari</small><small>At &amp; Post Usrauli, Tahseel Shahganj, Dist. Jaunpur</small></p>
+              <p class="mob">Mob.: <a href="tel:+919892936906">9892936906</a>, <a href="tel:+919823949727">9823949727</a></p>
+              <div class="actions">
+                <a class="btn primary" target="_blank" rel="noopener"
+                   href="https://www.google.com/maps/search/?api=1&query=Usrauli%2C+Shahganj%2C+Jaunpur%2C+Uttar+Pradesh">Get directions</a>
+                <button class="btn" type="button" id="ics">Add to calendar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="face back"></div>
+    </section>
+
+    <!-- Page 4: compliments and countdown -->
+    <section class="sheet" data-page="3" aria-label="Best compliments and countdown">
+      <div class="face front">
+        <div class="frame"></div>
+        <div class="shade"></div>
+        <div class="scroll">
+          <div class="inner">
+            <h2 class="rise" style="--d:.05s">With the best compliments of</h2>
+            <ul class="list rise" style="--d:.2s">
+              <li>Mo. Tajammul Hussain</li><li>Mo. Irshad Ahmed</li><li>Mo. Israr Ahmed</li>
+              <li>Mo. Ansar Ahmed</li><li>Mo. Dr. Zahid Ansari</li>
+              <li>Mo. Shahid Ansari</li><li>Mo. Hafiz Saquib Ansari</li>
+              <li>Mo. Wahid Ansari</li><li>Mo. Abid Ansari</li>
+            </ul>
+            <div class="dua rise" style="--d:.4s">
+              <p class="ar" lang="ar" dir="rtl">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+              <p class="en">May Allah bless you both and bring you together in goodness.</p>
+            </div>
+            <p class="closing rise" style="--d:.55s">Aapki aamad ke muntazir<small>Awaiting your presence, in shaa Allah</small></p>
+            <div class="actions rise" style="--d:.65s">
+              <a class="btn" id="share" target="_blank" rel="noopener" href="#">Share on WhatsApp</a>
+              <a class="btn" id="call" href="#" hidden>Call to confirm</a>
+            </div>
+            <div class="timer-wrap rise" style="--d:.8s">
+              <p class="timer-title" id="timer-title">Counting down to the Nikah</p>
+              <div class="timer" id="timer" role="timer">
+                <div class="cell"><b id="d">--</b><span>days</span></div>
+                <div class="cell"><b id="h">--</b><span>hours</span></div>
+                <div class="cell"><b id="m">--</b><span>minutes</span></div>
+                <div class="cell"><b id="s">--</b><span>seconds</span></div>
+              </div>
+              <p class="arrived" id="arrived" hidden>Alhamdulillah, the day is here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="face back"></div>
+    </section>
+  </div>
+
+  <nav class="nav" aria-label="Page navigation">
+    <button class="arrow" id="prev" type="button" aria-label="Previous page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="dots" id="dots"></div>
+    <button class="arrow" id="next" type="button" aria-label="Next page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </nav>
+</main>
+
+<script>
+  // ---- Edit these ----
+  const NIKAH_START  = "2026-11-28T14:00:00+05:30";
+  const WALIMA_START = "2026-11-29T11:00:00+05:30";
+  const MASJID_NAME  = "";   // e.g. "Jama Masjid, Usrauli" (leave empty to show "in the Masjid")
+  const RSVP_PHONE   = "";   // e.g. "+919876543210" (leave empty to hide the call button)
+  const VENUE_TEXT   = "Mr. & Mrs. Nisar Ahmad, At & Post Usrauli, Tahseel Shahganj, Dist. Jaunpur, Uttar Pradesh";
+  // --------------------
+
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2, "0");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const TURN_MS = reduce ? 0 : 1150;
+
+  if (MASJID_NAME) $("masjid").textContent = "at " + MASJID_NAME;
+  if (RSVP_PHONE) { $("call").href = "tel:" + RSVP_PHONE; $("call").hidden = false; }
+
+  // Floating gold dust
+  if (!reduce) {
+    const dust = $("dust");
+    for (let i = 0; i < 16; i++) {
+      const p = document.createElement("i");
+      p.style.setProperty("--x", (Math.random() * 100).toFixed(1) + "%");
+      p.style.setProperty("--s", (3 + Math.random() * 4).toFixed(1) + "px");
+      p.style.setProperty("--t", (11 + Math.random() * 10).toFixed(1) + "s");
+      p.style.setProperty("--dl", (-Math.random() * 18).toFixed(1) + "s");
+      p.style.setProperty("--dx", (Math.random() * 60 - 30).toFixed(0) + "px");
+      dust.appendChild(p);
+    }
+  }
+
+  // ---- Book pages ----
+  const sheets = [...document.querySelectorAll(".sheet")];
+  const N = sheets.length;
+  const dots = $("dots");
+  let cur = 0;
+  let busy = false;
+
+  sheets.forEach((s, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-label", "Go to page " + (i + 1));
+    b.addEventListener("click", () => turnTo(i));
+    dots.appendChild(b);
+  });
+
+  // Pages already turned sit on the left, stacked so the latest turn is on top;
+  // pages still to read sit on the right, stacked so the first page is on top.
+  function stack(movingIdx) {
+    sheets.forEach((s, i) => {
+      s.classList.toggle("flipped", i < cur);
+      s.style.zIndex = i === movingIdx ? N + 5 : (i < cur ? 10 + i : 10 + (N - i));
+    });
+  }
+
+  function sync() {
+    [...dots.children].forEach((b, n) => b.setAttribute("aria-current", n === cur ? "true" : "false"));
+    $("prev").disabled = cur === 0;
+    $("next").disabled = cur === N - 1;
+  }
+
+  function reveal(i) {
+    sheets.forEach((s, n) => s.querySelector(".scroll").classList.toggle("in", n === i));
+  }
+
+  function turnTo(n) {
+    n = Math.max(0, Math.min(N - 1, n));
+    if (n === cur || busy) return;
+    const movingIdx = n > cur ? cur : n;   // the leaf that actually lifts
+    busy = true;
+    cur = n;
+    stack(movingIdx);
+    const leaf = sheets[movingIdx];
+    leaf.classList.add("turning");
+    setTimeout(() => {
+      leaf.classList.remove("turning");
+      stack(-1);
+      reveal(cur);
+      busy = false;
+    }, TURN_MS);
+    reveal(cur);
+    sync();
+  }
+
+  stack(-1);
+  reveal(0);
+  sync();
+
+  $("prev").addEventListener("click", () => turnTo(cur - 1));
+  $("next").addEventListener("click", () => turnTo(cur + 1));
+  addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") turnTo(cur + 1);
+    if (e.key === "ArrowLeft")  turnTo(cur - 1);
+  });
+
+  // Swipe to turn
+  const book = $("book");
+  let sx = 0, sy = 0, tracking = false;
+  function finishSwipe(x, y) {
+    if (!tracking) return;
+    tracking = false;
+    const dx = x - sx, dy = y - sy;
+    if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.2) return;  // too short, or a vertical scroll
+    turnTo(dx < 0 ? cur + 1 : cur - 1);
+  }
+  // Touch (phones)
+  book.addEventListener("touchstart", e => {
+    const t = e.touches[0];
+    sx = t.clientX; sy = t.clientY; tracking = true;
+  }, { passive: true });
+  book.addEventListener("touchend", e => {
+    const t = e.changedTouches[0];
+    finishSwipe(t.clientX, t.clientY);
+  }, { passive: true });
+  book.addEventListener("touchcancel", () => { tracking = false; }, { passive: true });
+  // Mouse drag (desktop)
+  book.addEventListener("pointerdown", e => {
+    if (e.pointerType !== "mouse") return;
+    sx = e.clientX; sy = e.clientY; tracking = true;
+  });
+  book.addEventListener("pointerup", e => {
+    if (e.pointerType !== "mouse") return;
+    finishSwipe(e.clientX, e.clientY);
+  });
+
+  // Countdown
+  const target = new Date(NIKAH_START).getTime();
+  function tick() {
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      $("timer").hidden = true; $("timer-title").hidden = true; $("arrived").hidden = false;
+      return false;
+    }
+    const s = Math.floor(diff / 1000);
+    $("d").textContent = Math.floor(s / 86400);
+    $("h").textContent = pad(Math.floor((s % 86400) / 3600));
+    $("m").textContent = pad(Math.floor((s % 3600) / 60));
+    const sec = pad(s % 60), sEl = $("s");
+    if (sEl.textContent !== sec) {
+      sEl.textContent = sec;
+      sEl.classList.remove("pop"); void sEl.offsetWidth; sEl.classList.add("pop");
+    }
+    return true;
+  }
+  if (tick()) { const t = setInterval(() => { if (!tick()) clearInterval(t); }, 1000); }
+
+  // WhatsApp share
+  const msg = "Assalamu Alaikum! You are warmly invited to the wedding of Mohammad Aqib Ansari and Fiza Ansari.\n\n" +
+    "Nikah: Saturday, 28 November 2026, 2:00 PM, after Zuhr prayer\n" +
+    "Walima: Sunday, 29 November 2026, 11:00 AM\n" +
+    "Venue: " + VENUE_TEXT + "\n\n" + location.href;
+  $("share").href = "https://wa.me/?text=" + encodeURIComponent(msg);
+
+  // Calendar file with both events
+  $("ics").addEventListener("click", () => {
+    const fmt = t => new Date(t).toISOString().replace(/[-:]|\.\d{3}/g, "");
+    const esc = v => v.replace(/,/g, "\\,");
+    const ev = (uid, start, hours, title) => [
+      "BEGIN:VEVENT",
+      `UID:${uid}@wedding-invitation`,
+      `DTSTAMP:${fmt(Date.now())}`,
+      `DTSTART:${fmt(new Date(start).getTime())}`,
+      `DTEND:${fmt(new Date(start).getTime() + hours * 3600000)}`,
+      `SUMMARY:${esc(title)}`,
+      `LOCATION:${esc(VENUE_TEXT)}`,
+      "END:VEVENT"
+    ].join("\r\n");
+    const ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Wedding Invitation//EN",
+      ev("nikah", NIKAH_START, 3, "Nikah: Aqib and Fiza"),
+      ev("walima", WALIMA_START, 3, "Walima: Aqib and Fiza"),
+      "END:VCALENDAR"
+    ].join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+    a.download = "aqib-fiza-wedding.ics";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+</script>
+</body>
+</html>
